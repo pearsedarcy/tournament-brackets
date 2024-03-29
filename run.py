@@ -11,3 +11,6 @@ CREDS = Credentials.from_service_account_file('creds.json')
 SCOPE_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPE_CREDS)
 SHEET = GSPREAD_CLIENT.open('tournament_brackets')
+
+if __name__ == '__main__':
+    main()
