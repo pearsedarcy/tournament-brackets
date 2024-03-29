@@ -15,5 +15,10 @@ SHEET = GSPREAD_CLIENT.open('tournament_brackets')
 
 participants = SHEET.worksheet('participants')
 
+# Main function
+def main():
+    print('Welcome to Tournament Brackets')
+
+# Call main function
 if __name__ == '__main__':
     main()
