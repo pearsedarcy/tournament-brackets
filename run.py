@@ -13,12 +13,10 @@ SCOPE_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPE_CREDS)
 SHEET = GSPREAD_CLIENT.open('tournament_brackets')
 
-
 def view_tournament(tournament_id):
     '''
     View a tournament
     '''
-   
     tournament = SHEET.worksheet(tournament_id)
     print(f'Welcome to {tournament.title}')
     
@@ -27,13 +25,20 @@ def create_tournament():
     '''
     Create a new tournament
     '''
-    print('Enter the name of the Tournament')
-    # TODO - Add type checking for the lenght of input
-    tournament_title = input().title()
+    # TODO Add input validation
+    while True:
+        tournament_title = input('Enter the name of the Tournament\n').title()
+        if len(tournament_title) > 3 and len(tournament_title) < 50:
+            break
+        else:
+            print('Invalid input. Please enter a title between 4 and 50 characters.')
+        
+    #tournament_title = input('Enter the name of the Tournament\n').title()
     # Create the ID of the tournament
     # TODO - Add a function to check if the ID already exists
     tournament_id = tournament_title[0:3].upper() + str(random.randint(100, 999))
     create_worksheet(tournament_id)
+    # TODO - Add tournament sheet formatting
     print(f'{tournament_title} has been created!')
     print(f'The ID of the tournament is {tournament_id}\nPlease take note of this for future reference')
     view_tournament(tournament_id)
@@ -72,7 +77,8 @@ def main():
     print('1. Create a new Tournament')
     print('2. View an existing Tournament?')
     print('3. Exit')
-    user_choice = input()
+    # TODO Add input validation
+    user_choice = input('Please pick from the options above i.e. 1, 2 or 3\n')
     intro(user_choice)
 
 
