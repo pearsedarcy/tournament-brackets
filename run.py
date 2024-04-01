@@ -1,5 +1,6 @@
 import gspread
 from google.oauth2.service_account import Credentials
+import random
 
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
@@ -23,9 +24,14 @@ def create_tournament():
     Create a new tournament
     '''
     print('Enter the name of the Tournament')
-    tournament_title = input()
-    create_worksheet(tournament_title)
-    print(f'{tournament_title} has been created!')
+    # TODO - Add type checking for the lenght of input
+    tournament_title = input().title()
+    # Create the ID of the tournament
+    # TODO - Add a function to check if the ID already exists
+    tournament_id = tournament_title[0:3].upper() + str(random.randint(100, 999))
+    create_worksheet(tournament_id)
+    print(f'{tournament_title} has been created!\n Please take note of this for future reference')
+    print(f'The ID of the tournament is {tournament_id}')
 
 # Introduction and instructions
 def intro(choice):
