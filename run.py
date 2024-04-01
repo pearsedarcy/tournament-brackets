@@ -25,18 +25,21 @@ def create_tournament():
     '''
     Create a new tournament
     '''
-    # TODO Add input validation
     while True:
         tournament_title = input('Enter the name of the Tournament\n').title()
         if len(tournament_title) > 3 and len(tournament_title) < 50:
             break
         else:
             print('Invalid input. Please enter a title between 4 and 50 characters.')
-        
-    #tournament_title = input('Enter the name of the Tournament\n').title()
     # Create the ID of the tournament
-    # TODO - Add a function to check if the ID already exists
     tournament_id = tournament_title[0:3].upper() + str(random.randint(100, 999))
+    # check if the ID already exists and create a new one if it does
+    while True:
+        try:
+            SHEET.worksheet(tournament_id)
+            tournament_id = tournament_title[0:3].upper() + str(random.randint(100, 999))
+        except gspread.exceptions.WorksheetNotFound:
+            break
     create_worksheet(tournament_id)
     # TODO - Add tournament sheet formatting
     print(f'{tournament_title} has been created!')
