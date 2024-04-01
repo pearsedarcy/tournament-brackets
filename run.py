@@ -15,6 +15,29 @@ SHEET = GSPREAD_CLIENT.open('tournament_brackets')
 
 participants = SHEET.worksheet('participants')
 
+# TODO - Create a function to view a tournament
+
+# TODO - Create a function to create a new tournament
+
+# Introduction and instructions
+def intro(choice):
+    '''
+    Introduction and instructions
+    '''
+   
+    if choice == '1':
+        print('Enter the name of the Tournament')
+        tournament_title = input()
+        create_worksheet(tournament_title)
+        print(f'{tournament_title} has been created!')
+    elif choice == '2':
+        print('Please enter the ID of the Tournament you would like to view')
+        tournament_id = input()
+        view_tournament(tournament_id)
+    elif choice == '3':
+        print('Goodbye!')
+    
+
 #create a new worksheet
 def create_worksheet(title):
     '''
@@ -28,11 +51,14 @@ def main():
     Main function
     
     '''
-    print('Welcome to Tournament Brackets')
-    print('What would you like to call your new Tournament?')
-    tournament_title = input()
-    create_worksheet(tournament_title)
-    print(f'{tournament_title} has been created!')
+    print('Welcome to Tournament Brackets\n')
+    print('Create and manage your own Tournament Brackets\n')
+    print('What would you like to do?\n')
+    print('1. Create a new Tournament')
+    print('2. View an existing Tournament?')
+    print('3. Exit')
+    user_choice = input()
+    intro(user_choice)
 
 
 # Call main function
