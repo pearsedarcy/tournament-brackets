@@ -26,7 +26,7 @@ def create_tournament():
     Create a new tournament
     '''
     while True:
-        tournament_title = input('Enter the name of the Tournament\n').title()
+        tournament_title = input('Enter the name of the Tournament\n').title().strip()
         if len(tournament_title) > 3 and len(tournament_title) < 50:
             break
         else:
