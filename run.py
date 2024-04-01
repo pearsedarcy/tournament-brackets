@@ -17,7 +17,15 @@ participants = SHEET.worksheet('participants')
 
 # TODO - Create a function to view a tournament
 
-# TODO - Create a function to create a new tournament
+# Function to create a new tournament
+def create_tournament():
+    '''
+    Create a new tournament
+    '''
+    print('Enter the name of the Tournament')
+    tournament_title = input()
+    create_worksheet(tournament_title)
+    print(f'{tournament_title} has been created!')
 
 # Introduction and instructions
 def intro(choice):
@@ -26,10 +34,7 @@ def intro(choice):
     '''
    
     if choice == '1':
-        print('Enter the name of the Tournament')
-        tournament_title = input()
-        create_worksheet(tournament_title)
-        print(f'{tournament_title} has been created!')
+        create_tournament()
     elif choice == '2':
         print('Please enter the ID of the Tournament you would like to view')
         tournament_id = input()
