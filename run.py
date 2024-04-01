@@ -14,11 +14,15 @@ GSPREAD_CLIENT = gspread.authorize(SCOPE_CREDS)
 SHEET = GSPREAD_CLIENT.open('tournament_brackets')
 
 
-participants = SHEET.worksheet('participants')
+def view_tournament(tournament_id):
+    '''
+    View a tournament
+    '''
+   
+    tournament = SHEET.worksheet(tournament_id)
+    print(f'Welcome to {tournament.title}')
+    
 
-# TODO - Create a function to view a tournament
-
-# Function to create a new tournament
 def create_tournament():
     '''
     Create a new tournament
@@ -33,7 +37,6 @@ def create_tournament():
     print(f'{tournament_title} has been created!\n Please take note of this for future reference')
     print(f'The ID of the tournament is {tournament_id}')
 
-# Introduction and instructions
 def intro(choice):
     '''
     Introduction and instructions
@@ -49,7 +52,7 @@ def intro(choice):
         print('Goodbye!')
     
 
-#create a new worksheet
+
 def create_worksheet(title):
     '''
     Creates a new worksheet with the given title
