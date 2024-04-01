@@ -34,8 +34,9 @@ def create_tournament():
     # TODO - Add a function to check if the ID already exists
     tournament_id = tournament_title[0:3].upper() + str(random.randint(100, 999))
     create_worksheet(tournament_id)
-    print(f'{tournament_title} has been created!\n Please take note of this for future reference')
-    print(f'The ID of the tournament is {tournament_id}')
+    print(f'{tournament_title} has been created!')
+    print(f'The ID of the tournament is {tournament_id}\nPlease take note of this for future reference')
+    view_tournament(tournament_id)
 
 def intro(choice):
     '''
