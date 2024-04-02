@@ -13,6 +13,18 @@ SCOPE_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPE_CREDS)
 SHEET = GSPREAD_CLIENT.open('tournament_brackets')
 
+
+def import_participants(number):
+    '''
+    Import participants from the sample_participants sheet
+    '''
+    participants_sheet = SHEET.worksheet('sample_participants')
+    participants = participants_sheet.get('A1:A' + number)
+    sample_participants_list = [participant[0] for participant in participants]
+    print(f'{len(participants_list)} participants have been added to the tournament')
+    return sample_participants_list
+    
+
 def choose_participants():
     '''
     Choose whether to enter participants manually or or use sample participants
@@ -46,6 +58,7 @@ def view_tournament(tournament_id):
         choice = choose_participants()
     else:
         # TODO - Add options for exisiting tournaments
+        print('What would you like to do?')
     
     
 
