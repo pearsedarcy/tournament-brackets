@@ -13,12 +13,40 @@ SCOPE_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPE_CREDS)
 SHEET = GSPREAD_CLIENT.open('tournament_brackets')
 
+def choose_participants():
+    '''
+    Choose whether to enter participants manually or or use sample participants
+    '''
+    print('Would you like to enter your own participants or use sample participants?')
+    print('1. Enter participants')
+    print('2. Use sample participants')
+    while True:
+        choice = input('Please enter 1 or 2\n')
+        if choice in ['1', '2']:
+            if choice == '1':
+                input_participants()
+                break
+            else:
+                number_of_participants = input('How many participants would you like?')
+                import_participants(number_of_participants)
+            break
+        else:
+            print('Invalid input. Please enter 1 or 2')
+    return choice
+
 def view_tournament(tournament_id):
     '''
     View a tournament
     '''
     tournament = SHEET.worksheet(tournament_id)
     print(f'Welcome to {tournament.title}')
+    # if the tournament has no participants
+    if len(tournament.get_all_values()) == 1:
+        print('There are no participants in this tournament')
+        choice = choose_participants()
+    else:
+        # TODO - Add options for exisiting tournaments
+    
     
 
 def create_tournament():
