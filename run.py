@@ -35,15 +35,18 @@ def input_participants(tournament_id):
     print('Participants have been added to the tournament')
 
 
-def import_participants(number):
+
+def import_participants(number, tournament_id):
     '''
-    Import participants from the sample_participants sheet
+    Import participants from the sample_participants sheet and add them to the tournament sheet
     '''
-    participants_sheet = SHEET.worksheet('sample_participants')
-    participants = participants_sheet.get('A1:A' + number)
-    sample_participants_list = [participant[0] for participant in participants]
-    print(f'{len(sample_participants_list)} participants have been added to the tournament')
-    return sample_participants_list
+    sample_participants_sheet = SHEET.worksheet('sample_participants')
+    sample_participants = sample_participants_sheet.get('A1:A' + number)
+    sample_participants_list = [participant[0] for participant in sample_participants]
+    print(f'Please wait, Adding {len(sample_participants_list)} participants to the tournament...')
+    for participant in sample_participants_list:
+        SHEET.worksheet(tournament_id).append_row([participant])
+    print('Participants have been added to the tournament')
     
 
 def choose_participants(tournament_id):
