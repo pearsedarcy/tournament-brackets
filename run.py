@@ -13,6 +13,21 @@ SCOPE_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPE_CREDS)
 SHEET = GSPREAD_CLIENT.open('tournament_brackets')
 
+def input_participants(tournament_id):
+    '''
+    Input participants manually
+    '''
+    print('Enter the participants of the tournament\n')
+    print('Please enter the name of each participant and press enter after each name\n')
+    print('When you are done, type "Done"')
+    participants = []
+    while True:
+        participant = input()
+        if participant == 'Done':
+            break
+        participants.append(participant)
+    print(f'{len(participants)} participants have been added to the tournament')
+    return participants
 
 def import_participants(number):
     '''
