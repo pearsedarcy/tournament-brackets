@@ -21,7 +21,7 @@ def import_participants(number):
     participants_sheet = SHEET.worksheet('sample_participants')
     participants = participants_sheet.get('A1:A' + number)
     sample_participants_list = [participant[0] for participant in participants]
-    print(f'{len(participants_list)} participants have been added to the tournament')
+    print(f'{len(sample_participants_list)} participants have been added to the tournament')
     return sample_participants_list
     
 
@@ -39,6 +39,7 @@ def choose_participants():
                 input_participants()
                 break
             else:
+                # TODO - Add input validation to ensure number of partipants is greater than 2 and less than 33
                 number_of_participants = input('How many participants would you like?')
                 import_participants(number_of_participants)
             break
