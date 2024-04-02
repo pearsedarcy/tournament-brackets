@@ -30,10 +30,12 @@ def input_participants(tournament_id):
             participants.append(participant)
         else:
             print('Invalid input. Please enter a name between 4 and 20 characters')
+    # TODO - Add additional participants if the number of participants is not a power of 2
     print(f'Please wait, Adding {len(participants)} participants to the tournament...')
     for participant in participants:
         SHEET.worksheet(tournament_id).append_row([participant])
     print('Participants have been added to the tournament')
+    view_tournament(tournament_id)
 
 
 def import_participants(number, tournament_id):
@@ -43,10 +45,12 @@ def import_participants(number, tournament_id):
     sample_participants_sheet = SHEET.worksheet('sample_participants')
     sample_participants = sample_participants_sheet.get('A1:A' + number)
     sample_participants_list = [participant[0] for participant in sample_participants]
+    # TODO - Add additional participants if the number of participants is not a power of 2
     print(f'Please wait, Adding {len(sample_participants_list)} participants to the tournament...')
     for participant in sample_participants_list:
         SHEET.worksheet(tournament_id).append_row([participant])
     print('Participants have been added to the tournament')
+    view_tournament(tournament_id)
 
 
 def choose_participants(tournament_id):
