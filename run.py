@@ -28,7 +28,7 @@ def input_participants(tournament_id):
         elif len(participant) > 3 and len(participant) < 20:
             participants.append(participant)
         else:
-            print('Invalid input. Please enter a name between 4 and 50 characters')
+            print('Invalid input. Please enter a name between 4 and 20 characters')
     print(f'Please wait, Adding {len(participants)} participants to the tournament...')
     for participant in participants:
         SHEET.worksheet(tournament_id).append_row([participant])
