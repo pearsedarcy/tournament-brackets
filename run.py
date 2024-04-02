@@ -80,8 +80,12 @@ def main():
     print('1. Create a new Tournament')
     print('2. View an existing Tournament?')
     print('3. Exit')
-    # TODO Add input validation
-    user_choice = input('Please pick from the options above i.e. 1, 2 or 3\n')
+    while True:
+        user_choice = input('Please pick from the options above i.e. 1, 2 or 3\n')
+        if user_choice in ['1', '2', '3']:
+            break
+        else:
+            print('Invalid input. Please enter a valid option.')
     intro(user_choice)
 
 
