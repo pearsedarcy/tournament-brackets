@@ -35,7 +35,6 @@ def input_participants(tournament_id):
     print('Participants have been added to the tournament')
 
 
-
 def import_participants(number, tournament_id):
     '''
     Import participants from the sample_participants sheet and add them to the tournament sheet
@@ -71,6 +70,7 @@ def choose_participants(tournament_id):
             print('Invalid input. Please enter 1 or 2')
     return choice
 
+
 def view_tournament(tournament_id):
     '''
     View a tournament
@@ -87,7 +87,6 @@ def view_tournament(tournament_id):
         print('What would you like to do?')
     
     
-
 def create_tournament():
     '''
     Create a new tournament
@@ -114,6 +113,7 @@ def create_tournament():
     print(f'The ID of the tournament is {tournament_id}\nPlease take note of this for future reference')
     view_tournament(tournament_id)
 
+
 def intro(choice):
     '''
     Introduction and instructions
@@ -137,7 +137,6 @@ def intro(choice):
     elif choice == '3':
         print('Goodbye!')
     
-
 
 def create_worksheet(title):
     '''
