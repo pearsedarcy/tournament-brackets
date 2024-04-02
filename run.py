@@ -13,6 +13,7 @@ SCOPE_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPE_CREDS)
 SHEET = GSPREAD_CLIENT.open('tournament_brackets')
 
+
 def input_participants(tournament_id):
     '''
     Input participants manually
@@ -46,7 +47,7 @@ def import_participants(number, tournament_id):
     for participant in sample_participants_list:
         SHEET.worksheet(tournament_id).append_row([participant])
     print('Participants have been added to the tournament')
-    
+
 
 def choose_participants(tournament_id):
     '''
@@ -85,8 +86,8 @@ def view_tournament(tournament_id):
     else:
         # TODO - Add options for exisiting tournaments
         print('What would you like to do?')
-    
-    
+
+
 def create_tournament():
     '''
     Create a new tournament
@@ -118,14 +119,14 @@ def intro(choice):
     '''
     Introduction and instructions
     '''
-   
+
     if choice == '1':
         create_tournament()
     elif choice == '2':
         while True:
             tournament_id = input('Please enter the ID of the Tournament you would like to view\n').upper().strip()
             try:
-                if tournament_id== 'EXIT':
+                if tournament_id == 'EXIT':
                     main()
                     break
                 else:
@@ -136,7 +137,7 @@ def intro(choice):
         view_tournament(tournament_id)
     elif choice == '3':
         print('Goodbye!')
-    
+
 
 def create_worksheet(title):
     '''
@@ -145,10 +146,12 @@ def create_worksheet(title):
     SHEET.add_worksheet(title, 80, 25)
 
 # Main function
+
+
 def main():
     '''
     Main function
-    
+
     '''
     print('Welcome to Tournament Brackets\n')
     print('Create and manage your own Tournament Brackets\n')
