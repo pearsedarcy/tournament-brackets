@@ -25,7 +25,7 @@ def import_participants(number):
     return sample_participants_list
     
 
-def choose_participants():
+def choose_participants(tournament_id):
     '''
     Choose whether to enter participants manually or or use sample participants
     '''
@@ -36,12 +36,12 @@ def choose_participants():
         choice = input('Please enter 1 or 2\n')
         if choice in ['1', '2']:
             if choice == '1':
-                input_participants()
+                input_participants(tournament_id)
                 break
             else:
                 # TODO - Add input validation to ensure number of partipants is greater than 2 and less than 33
-                number_of_participants = input('How many participants would you like?')
-                import_participants(number_of_participants)
+                number_of_participants = input('How many participants would you like?\n')
+                import_participants(number_of_participants, tournament_id)
             break
         else:
             print('Invalid input. Please enter 1 or 2')
@@ -54,9 +54,10 @@ def view_tournament(tournament_id):
     tournament = SHEET.worksheet(tournament_id)
     print(f'Welcome to {tournament.title}')
     # if the tournament has no participants
+    # TODO - Fix to precisely check if there are no participants
     if len(tournament.get_all_values()) == 1:
         print('There are no participants in this tournament')
-        choice = choose_participants()
+        choose_participants(tournament_id)
     else:
         # TODO - Add options for exisiting tournaments
         print('What would you like to do?')
@@ -68,6 +69,7 @@ def create_tournament():
     Create a new tournament
     '''
     while True:
+        # TODO - add confirmation for the title i.e. are you sure you want to use this title?
         tournament_title = input('Enter the name of the Tournament\n').title().strip()
         if len(tournament_title) > 3 and len(tournament_title) < 50:
             break
