@@ -23,11 +23,17 @@ def input_participants(tournament_id):
     participants = []
     while True:
         participant = input()
-        if participant == 'Done':
+        if participant.upper().strip() == 'DONE':
             break
-        participants.append(participant)
-    print(f'{len(participants)} participants have been added to the tournament')
-    return participants
+        elif len(participant) > 3 and len(participant) < 20:
+            participants.append(participant)
+        else:
+            print('Invalid input. Please enter a name between 4 and 50 characters')
+    print(f'Please wait, Adding {len(participants)} participants to the tournament...')
+    for participant in participants:
+        SHEET.worksheet(tournament_id).append_row([participant])
+    print('Participants have been added to the tournament')
+
 
 def import_participants(number):
     '''
@@ -54,7 +60,7 @@ def choose_participants(tournament_id):
                 input_participants(tournament_id)
                 break
             else:
-                # TODO - Add input validation to ensure number of partipants is greater than 2 and less than 33
+                # TODO - Add input validation to ensure number of partipants is greater than 2 and less than 33 and that it is an integer
                 number_of_participants = input('How many participants would you like?\n')
                 import_participants(number_of_participants, tournament_id)
             break
