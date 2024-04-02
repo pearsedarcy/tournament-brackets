@@ -54,8 +54,17 @@ def intro(choice):
     if choice == '1':
         create_tournament()
     elif choice == '2':
-        print('Please enter the ID of the Tournament you would like to view')
-        tournament_id = input()
+        while True:
+            tournament_id = input('Please enter the ID of the Tournament you would like to view\n').upper().strip()
+            try:
+                if tournament_id== 'EXIT':
+                    main()
+                    break
+                else:
+                    SHEET.worksheet(tournament_id)
+                break
+            except gspread.exceptions.WorksheetNotFound:
+                print('Invalid ID. Please enter a valid ID or type "Exit" to go back')
         view_tournament(tournament_id)
     elif choice == '3':
         print('Goodbye!')
