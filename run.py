@@ -81,7 +81,7 @@ def view_tournament(tournament_id):
     View a tournament
     '''
     tournament = SHEET.worksheet(tournament_id)
-    print(f'Welcome to {tournament.title}')
+    print(f'Welcome to {tournament.title}\n')
     # if the tournament has no participants
     # TODO - Fix to precisely check if there are no participants
     if len(tournament.get_all_values()) == 1:
@@ -89,7 +89,36 @@ def view_tournament(tournament_id):
         choose_participants(tournament_id)
     else:
         # TODO - Add options for exisiting tournaments
-        print('What would you like to do?')
+        print('What would you like to do?\n')
+        print('1. View Participants')
+        print('2. View Brackets')
+        print('3. Add Participants')
+        print('4. Delete Participants')
+        print('5. Delete Tournament')
+        print('6. Exit\n')
+        print('Please enter the number of the option you would like to choose\n')
+        while True:
+            choice = input('Your input:  ')
+            if choice in ['1', '2', '3', '4', '5', '6', 'exit']:
+                if choice.lower().strip()  == 'exit':
+                    print(choice.upper().strip())
+                    view_tournament(tournament_id)
+                elif choice == '1':
+                    view_participants(tournament_id)
+                elif choice == '2':
+                    view_brackets(tournament_id)
+                elif choice == '3':
+                    choose_participants(tournament_id)
+                elif choice == '4':
+                    delete_participants(tournament_id)
+                elif choice == '5':
+                    delete_tournament(tournament_id)
+                elif choice == '6':
+                    main()
+                break
+            else:
+                print('\nInvalid input. Please enter a valid option or type "Exit" to go back.\n')
+                
 
 
 def create_tournament():
