@@ -14,6 +14,16 @@ GSPREAD_CLIENT = gspread.authorize(SCOPE_CREDS)
 SHEET = GSPREAD_CLIENT.open('tournament_brackets')
 
 
+# Delete tournament function
+def delete_tournament(tournament_id):
+    '''
+    Delete a tournament
+    '''
+    SHEET.del_worksheet(SHEET.worksheet(tournament_id))
+    print(f'\nTournament {tournament_id} has been deleted\n')
+    main()
+
+
 def input_participants(tournament_id):
     '''
     Input participants manually
