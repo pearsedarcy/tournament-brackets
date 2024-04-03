@@ -93,8 +93,7 @@ def view_tournament(tournament_id):
     tournament = SHEET.worksheet(tournament_id)
     print(f'Welcome to {tournament.title}\n')
     # if the tournament has no participants
-    # TODO - Fix to precisely check if there are no participants
-    if len(tournament.get_all_values()) == 1:
+    if tournament.get('A2') == [[]]:
         print('There are no participants in this tournament')
         choose_participants(tournament_id)
     else:
@@ -137,11 +136,11 @@ def create_tournament():
     '''
     while True:
         # TODO - add confirmation for the title i.e. are you sure you want to use this title?
-        tournament_title = input('Enter the name of the Tournament\n').title().strip()
+        tournament_title = input('\nEnter the name of the Tournament\n').title().strip()
         if len(tournament_title) > 3 and len(tournament_title) < 50:
             break
         else:
-            print('Invalid input. Please enter a title between 4 and 50 characters.')
+            print('Invalid input. Please enter a title between 4 and 50 characters.\n')
     # Create the ID of the tournament
     tournament_id = tournament_title[0:3].upper() + str(random.randint(100, 999))
     # check if the ID already exists and create a new one if it does
@@ -151,10 +150,10 @@ def create_tournament():
             tournament_id = tournament_title[0:3].upper() + str(random.randint(100, 999))
         except gspread.exceptions.WorksheetNotFound:
             break
-    create_worksheet(tournament_id)
-    # TODO - Add tournament sheet formatting
-    print(f'{tournament_title} has been created!')
-    print(f'The ID of the tournament is {tournament_id}\nPlease take note of this for future reference')
+    # Create the tournament sheet
+    SHEET.duplicate_sheet(source_sheet_id=1391351056, new_sheet_name=f'{tournament_id}')
+    print(f'{tournament_title} has been created!\n')
+    print(f'The ID of the tournament is {tournament_id}\nPlease take note of this for future reference\n')
     view_tournament(tournament_id)
 
 
