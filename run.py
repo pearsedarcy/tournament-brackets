@@ -90,6 +90,7 @@ def choose_participants(tournament_id, tournament_title):
                         break
                     else:
                         print('\nInvalid input. Please choose between 4, 8 and 16\n')
+                break
         else:
             print('\nInvalid input. Please enter a valid option (1 or 2)\n')
 
