@@ -8,7 +8,9 @@
             rows: 24
         });
         term.open(document.getElementById('terminal'));
-        term.writeln('Welcome to Tournament Brackets\nCreate and Manage your tournaments from the web\n');
+        term.writeln('Welcome to Tournament Brackets');
+        term.writeln('');
+        term.writeln('Create and Manage your tournaments from the web');
         term.writeln('');
 
         var ws = new WebSocket(location.protocol.replace('http', 'ws') + '//' + location.hostname + (location.port ? (
