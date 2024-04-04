@@ -189,7 +189,7 @@ def main_menu(choice):
                 break
             except gspread.exceptions.WorksheetNotFound:
                 print('\nInvalid ID. Please enter a valid ID or type "Exit" to go back\n')
-        view_tournament(tournament_id)
+        view_tournament(tournament_id, SHEET.worksheet(tournament_id).title)
     elif choice == '3':
         print('\nThank you for using Tournament Brackets\n')
         print('If you would like to use the app again, please click the refresh button below\n')
