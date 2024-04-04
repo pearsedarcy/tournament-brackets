@@ -187,26 +187,23 @@ def create_worksheet(title):
     '''
     SHEET.add_worksheet(title, 80, 25)
 
-# Main function
-
 
 def main():
     '''
-    Main function
-
+    Main function to run the program
+    Acts as a menu for the user to choose what they would like to do
     '''
-    print('Welcome to Tournament Brackets\n')
-    print('Create and manage your own Tournament Brackets\n')
     print('What would you like to do?\n')
     print('1. Create a new Tournament')
     print('2. View an existing Tournament?')
-    print('3. Exit')
+    print('3. Exit\n')
     while True:
-        user_choice = input('Please pick from the options above i.e. 1, 2 or 3\n')
+        print('Please enter the number of the option you would like to choose\n')
+        user_choice = input('Your Choice:  ') + '\n'
         if user_choice in ['1', '2', '3']:
             break
         else:
-            print('Invalid input. Please enter a valid option.')
+            print('Invalid input. Please enter a valid option.\n')
     intro(user_choice)
 
 
