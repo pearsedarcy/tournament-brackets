@@ -213,7 +213,7 @@ def main():
     print('Please enter the number of the option you would like to choose\n')
     while True:
         user_choice = input('Your Choice:  ')
-        if user_choice in ['1', '2', '3']:
+        if user_choice.strip() in ['1', '2', '3']:
             break
         else:
             print('\nInvalid input. Please enter a valid option (1, 2 or 3)\n')
