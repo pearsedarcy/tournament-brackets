@@ -86,43 +86,35 @@ def choose_participants(tournament_id):
     return choice
 
 
-def view_tournament(tournament_id):
+def view_tournament(tournament_id, tournament_title):
     '''
     View a tournament
     '''
     tournament = SHEET.worksheet(tournament_id)
-    print(f'Welcome to {tournament.title}\n')
+    print(f'Welcome to {tournament_title}\n')
     # if the tournament has no participants
     if tournament.get('A2') == [[]]:
-        print('There are no participants in this tournament')
+        print('There are no participants in this tournament\n')
         choose_participants(tournament_id)
     else:
-        # TODO - Add options for exisiting tournaments
         print('What would you like to do?\n')
-        print('1. View Participants')
-        print('2. View Brackets')
-        print('3. Add Participants')
-        print('4. Delete Participants')
-        print('5. Delete Tournament')
-        print('6. Exit\n')
+        print('1. Run the tournament')
+        print('2. Edit Participants')
+        print('3. Delete Tournament')
+        print('4. Exit\n')
         print('Please enter the number of the option you would like to choose\n')
         while True:
             choice = input('Your input:  ')
-            if choice in ['1', '2', '3', '4', '5', '6', 'exit']:
+            if choice.strip() in ['1', '2', '3', '4', 'exit']:
                 if choice.lower().strip()  == 'exit':
-                    print(choice.upper().strip())
                     view_tournament(tournament_id)
-                elif choice == '1':
-                    view_participants(tournament_id)
-                elif choice == '2':
-                    view_brackets(tournament_id)
-                elif choice == '3':
-                    choose_participants(tournament_id)
-                elif choice == '4':
-                    delete_participants(tournament_id)
-                elif choice == '5':
+                elif choice.strip() == '1':
+                    run_tournament(tournament_id)
+                elif choice.strip() == '2':
+                    edit_participants(tournament_id)
+                elif choice.strip() == '3':
                     delete_tournament(tournament_id)
-                elif choice == '6':
+                elif choice.strip() == '4':
                     main()
                 break
             else:
