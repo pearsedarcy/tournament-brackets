@@ -52,21 +52,51 @@ def input_participants(tournament_id, tournament_title):
     view_tournament(tournament_id, tournament_title)
 
 
-def import_participants(number, tournament_id, tournament_title):
+def import_participants(tournament_id, tournament_title, size):
     '''
     Import participants from the sample_participants sheet and add them to the tournament sheet
     '''
     sample_participants_sheet = SHEET.worksheet('sample_participants')
-    sample_participants = sample_participants_sheet.get('A1:A' + number)
+    sample_participants = sample_participants_sheet.get('A1:A' + size)
     sample_participants_list = [participant[0] for participant in sample_participants]
-    print(f'Please wait, Adding {len(sample_participants_list)} participants to the tournament...')
+    print(f'\nPlease wait, Adding {len(sample_participants_list)} participants to the tournament...\n')
     for i, participant in enumerate(sample_participants_list, start=2):
         SHEET.worksheet(tournament_id).batch_update([{ 'range': f'B{i}', 'values': [[participant]] }])
-    print('Participants have been added to the tournament')
+    print('Participants have been added to the tournament\n')
     view_tournament(tournament_id, tournament_title)
 
 
-def choose_participants(tournament_id, tournament_title):
+def view_tournament(tournament_id, tournament_title):
+    '''
+    View a tournament
+    '''
+    tournament = SHEET.worksheet(tournament_id)
+    print(f'Welcome to {tournament_title}\n')
+    print('What would you like to do?\n')
+    print('1. Run the tournament')
+    print('2. Edit Participants')
+    print('3. Delete Tournament')
+    print('4. Exit\n')
+    print('Please enter the number of the option you would like to choose\n')
+    while True:
+        choice = input('Your input:  ').strip().lower()
+        if choice in ['1', '2', '3', '4', 'exit']:
+            if choice.lower()  == 'exit':
+                view_tournament(tournament_id, tournament_title)
+            elif choice == '1':
+                run_tournament(tournament_id)
+            elif choice == '2':
+                edit_participants(tournament_id)
+            elif choice == '3':
+                delete_tournament(tournament_id)
+            elif choice == '4':
+                main()
+            break
+        else:
+            print('\nInvalid input. Please enter a valid option or type "Exit" to go back.\n')
+
+
+def choose_participants(tournament_id, tournament_title, size):
     '''
     Choose how to enter participants
 
@@ -81,54 +111,11 @@ def choose_participants(tournament_id, tournament_title):
             if choice == '1':
                 input_participants(tournament_id, tournament_title)
                 break
-            elif choice == '2':
-                print('How many participants would you like? (4, 8 or 16)\n')
-                while True:
-                    number_of_participants = input('Your Choice:  ').strip()
-                    if number_of_participants in ['4', '8', '16']:
-                        import_participants(number_of_participants, tournament_id, tournament_title)
-                        break
-                    else:
-                        print('\nInvalid input. Please choose between 4, 8 and 16\n')
+            else:
+                import_participants(tournament_id, tournament_title, size)
                 break
         else:
             print('\nInvalid input. Please enter a valid option (1 or 2)\n')
-
-
-def view_tournament(tournament_id, tournament_title):
-    '''
-    View a tournament
-    '''
-    tournament = SHEET.worksheet(tournament_id)
-    print(f'Welcome to {tournament_title}\n')
-    # if the tournament has no participants
-    if tournament.get('B2') == [[]]:
-        print('There are no participants in this tournament\n')
-        choose_participants(tournament_id, tournament_title)
-    else:
-        print('What would you like to do?\n')
-        print('1. Run the tournament')
-        print('2. Edit Participants')
-        print('3. Delete Tournament')
-        print('4. Exit\n')
-        print('Please enter the number of the option you would like to choose\n')
-        while True:
-            choice = input('Your input:  ').strip().lower()
-            if choice in ['1', '2', '3', '4', 'exit']:
-                if choice.lower()  == 'exit':
-                    view_tournament(tournament_id, tournament_title)
-                elif choice == '1':
-                    run_tournament(tournament_id)
-                elif choice == '2':
-                    edit_participants(tournament_id)
-                elif choice == '3':
-                    delete_tournament(tournament_id)
-                elif choice == '4':
-                    main()
-                break
-            else:
-                print('\nInvalid input. Please enter a valid option or type "Exit" to go back.\n')
-                
 
 
 def create_tournament():
@@ -170,7 +157,7 @@ def create_tournament():
     create_tournament_sheet(int(size), tournament_id)
     print(f'\n{tournament_title} has been created!\n')
     print(f'The ID of the tournament is {tournament_id}\nPlease take note of this for future reference\n')
-    view_tournament(tournament_id, tournament_title)
+    choose_participants(tournament_id, tournament_title, size)
 
 def create_tournament_sheet(size, tournament_id,):
     '''
