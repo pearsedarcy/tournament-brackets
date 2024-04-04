@@ -61,7 +61,7 @@ def import_participants(number, tournament_id, tournament_title):
     sample_participants_list = [participant[0] for participant in sample_participants]
     print(f'Please wait, Adding {len(sample_participants_list)} participants to the tournament...')
     for i, participant in enumerate(sample_participants_list, start=2):
-        SHEET.worksheet(tournament_id).batch_update([{ 'range': f'A{i}', 'values': [[participant]] }])
+        SHEET.worksheet(tournament_id).batch_update([{ 'range': f'B{i}', 'values': [[participant]] }])
     print('Participants have been added to the tournament')
     view_tournament(tournament_id, tournament_title)
 
@@ -101,7 +101,7 @@ def view_tournament(tournament_id, tournament_title):
     tournament = SHEET.worksheet(tournament_id)
     print(f'Welcome to {tournament_title}\n')
     # if the tournament has no participants
-    if tournament.get('A2') == [[]]:
+    if tournament.get('B2') == [[]]:
         print('There are no participants in this tournament\n')
         choose_participants(tournament_id, tournament_title)
     else:
