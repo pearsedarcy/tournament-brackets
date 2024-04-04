@@ -13,6 +13,48 @@ SCOPE_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPE_CREDS)
 SHEET = GSPREAD_CLIENT.open('tournament_brackets')
 
+def run_tournament(tournament_id):
+    tournament_sheet = SHEET.worksheet(tournament_id)
+    participants = [participant[0] for participant in tournament_sheet.get('B2:B17')]
+    rounds = []
+    print("\nGenerating Matches...\n")
+
+    participants_copy = participants.copy()
+    while len(participants_copy) > 1:
+        rounds.append(participants_copy)
+        # Add participants_copy to sheet
+        if len(rounds) == 1:
+            for i, participant in enumerate(participants_copy , start=2):
+                SHEET.worksheet(tournament_id).batch_update([{ 'range': f'D{i}', 'values': [[participant]] }])
+                SHEET.worksheet(tournament_id).batch_update([{ 'range': f'B{i}', 'values': [[participant]] }])
+        elif len(rounds) == 2:
+            for i, participant in enumerate(participants_copy, start=2):
+                SHEET.worksheet(tournament_id).batch_update([{ 'range': f'E{i}', 'values': [[participant]] }])
+        elif len(rounds) == 3:
+            for i, participant in enumerate(participants_copy, start=2):
+                SHEET.worksheet(tournament_id).batch_update([{ 'range': f'F{i}', 'values': [[participant]] }])
+        elif len(rounds) == 4:
+            for i, participant in enumerate(participants_copy, start=2):
+                SHEET.worksheet(tournament_id).batch_update([{ 'range': f'G{i}', 'values': [[participant]] }])
+        print(f"Round {len(rounds)}")
+        print("---------\n")
+        participants_copy = run_matchups(participants_copy)
+    winner = participants_copy[0]
+
+    print("The winner of the tournament is:", winner)
+
+def run_matchups(participants):
+    return [run_match(participants[i], participants[i + 1]) for i in range(0, len(participants), 2)]
+
+def run_match(participant1, participant2):
+    print(f"Match between {participant1} and {participant2}:\n")
+    print(f"Enter the name of the winning participant\n")
+    winner = input(f"Winner: ").strip()
+    while winner not in (participant1, participant2):
+        print("Invalid input. Please enter the name of the winning participant correctly.\n")
+        winner = input(f"Winner: ").strip()
+    print(f"\nThe winner of the match is: {winner}\n")
+    return winner
 
 # Delete tournament function
 def delete_tournament(tournament_id):
