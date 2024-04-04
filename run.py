@@ -24,7 +24,7 @@ def delete_tournament(tournament_id):
     main()
 
 
-def input_participants(tournament_id):
+def input_participants(tournament_id, tournament_title):
     '''
     Input participants manually
     '''
@@ -33,8 +33,8 @@ def input_participants(tournament_id):
     print('When you are done, type "Done"')
     participants = []
     while True:
-        participant = input()
-        if participant.upper().strip() == 'DONE':
+        participant = input().strip().title()
+        if participant.upper() == 'DONE':
             break
         elif len(participant) > 3 and len(participant) < 20:
             participants.append(participant)
@@ -45,10 +45,10 @@ def input_participants(tournament_id):
     for i, participant in enumerate(participants, start=2):
         SHEET.worksheet(tournament_id).batch_update([{ 'range': f'A{i}', 'values': [[participant]] }])
     print('Participants have been added to the tournament')
-    view_tournament(tournament_id)
+    view_tournament(tournament_id, tournament_title)
 
 
-def import_participants(number, tournament_id):
+def import_participants(number, tournament_id, tournament_title):
     '''
     Import participants from the sample_participants sheet and add them to the tournament sheet
     '''
@@ -66,7 +66,7 @@ def import_participants(number, tournament_id):
 def choose_participants(tournament_id, tournament_title):
     '''
     Choose how to enter participants
-    
+
     '''
     print('Would you like to enter your own participants or use sample participants?\n')
     print('1. Enter participants manually')
@@ -109,17 +109,17 @@ def view_tournament(tournament_id, tournament_title):
         print('4. Exit\n')
         print('Please enter the number of the option you would like to choose\n')
         while True:
-            choice = input('Your input:  ')
-            if choice.strip() in ['1', '2', '3', '4', 'exit']:
-                if choice.lower().strip()  == 'exit':
+            choice = input('Your input:  ').strip().lower()
+            if choice in ['1', '2', '3', '4', 'exit']:
+                if choice.lower()  == 'exit':
                     view_tournament(tournament_id, tournament_title)
-                elif choice.strip() == '1':
+                elif choice == '1':
                     run_tournament(tournament_id)
-                elif choice.strip() == '2':
+                elif choice == '2':
                     edit_participants(tournament_id)
-                elif choice.strip() == '3':
+                elif choice == '3':
                     delete_tournament(tournament_id)
-                elif choice.strip() == '4':
+                elif choice == '4':
                     main()
                 break
             else:
@@ -138,11 +138,11 @@ def create_tournament():
         tournament_title = input('Tournament Title:  ').title().strip()
         if len(tournament_title) > 3 and len(tournament_title) < 50:
             print(f'\nAre you sure you want to use "{tournament_title}" as the title?\nYou will not be able to change this in the future (yes/no)\n')
-            confirmation = input('Your Choice:  ')
-            while confirmation.lower().strip() not in ['yes', 'y', 'no', 'n']:
+            confirmation = input('Your Choice:  ').lower().strip()
+            while confirmation.lower() not in ['yes', 'y', 'no', 'n']:
                 print('\nInvalid input. Please enter "Yes" or "No"\n')
-                confirmation = input('Your Choice:  ')
-            if confirmation.lower().strip() == 'yes' or confirmation.lower().strip() == 'y':
+                confirmation = input('Your Choice:  ').lower().strip()
+            if confirmation == 'yes' or confirmation == 'y':
                 break
             else:
                 print('\nPlease enter a new title\n')
@@ -203,8 +203,8 @@ def main():
     print('3. Exit\n')
     print('Please enter the number of the option you would like to choose\n')
     while True:
-        user_choice = input('Your Choice:  ')
-        if user_choice.strip() in ['1', '2', '3']:
+        user_choice = input('Your Choice:  ').strip()
+        if user_choice in ['1', '2', '3']:
             break
         else:
             print('\nInvalid input. Please enter a valid option (1, 2 or 3)\n')
