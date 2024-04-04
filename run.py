@@ -161,11 +161,27 @@ def create_tournament():
             tournament_id = tournament_title[0:3].upper() + str(random.randint(100, 999))
         except gspread.exceptions.WorksheetNotFound:
             break
+    print('\nHow many participants will be in the tournament? (4, 8 or 16)\n')
+    size = input('Your Choice: ').strip()
+    while size not in ['4', '8', '16']:
+        print('\nInvalid input. Please enter a valid number (4, 8 or 16)\n')
+        size = input('Your Choice:  ').strip()
     # Create the tournament sheet
-    SHEET.duplicate_sheet(source_sheet_id=1391351056, new_sheet_name=f'{tournament_id}')
+    create_tournament_sheet(int(size), tournament_id)
     print(f'\n{tournament_title} has been created!\n')
     print(f'The ID of the tournament is {tournament_id}\nPlease take note of this for future reference\n')
     view_tournament(tournament_id, tournament_title)
+
+def create_tournament_sheet(size, tournament_id,):
+    '''
+    Create a new tournament sheet
+    '''
+    if size == 4:
+        SHEET.duplicate_sheet(source_sheet_id=1499309545, new_sheet_name=f'{tournament_id}')
+    elif size == 8:
+        SHEET.duplicate_sheet(source_sheet_id=1664735445, new_sheet_name=f'{tournament_id}')
+    elif size == 16:
+        SHEET.duplicate_sheet(source_sheet_id=1310633722, new_sheet_name=f'{tournament_id}')
 
 
 def main_menu(choice):
