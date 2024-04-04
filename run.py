@@ -28,22 +28,26 @@ def input_participants(tournament_id, tournament_title):
     '''
     Input participants manually
     '''
-    print('Enter the participants of the tournament\n')
-    print('Please enter the name of each participant and press enter after each name\n')
-    print('When you are done, type "Done"')
+    print('\nType the name of each participant\n')
+    print('Press enter after each name\n')
+    print('When you are done, type "Done"\n')
     participants = []
     while True:
         participant = input().strip().title()
         if participant.upper() == 'DONE':
             break
         elif len(participant) > 3 and len(participant) < 20:
-            participants.append(participant)
+            if participant not in participants:
+                participants.append(participant)
+            else: 
+                print('Participant already exists. Please enter a unique name\n')
         else:
             print('Invalid input. Please enter a name between 4 and 20 characters')
+        break
     # TODO - Add additional participants if the number of participants is not a power of 2
     print(f'Please wait, Adding {len(participants)} participants to the tournament...')
     for i, participant in enumerate(participants, start=2):
-        SHEET.worksheet(tournament_id).batch_update([{ 'range': f'A{i}', 'values': [[participant]] }])
+        SHEET.worksheet(tournament_id).batch_update([{ 'range': f'B{i}', 'values': [[participant]] }])
     print('Participants have been added to the tournament')
     view_tournament(tournament_id, tournament_title)
 
@@ -55,7 +59,6 @@ def import_participants(number, tournament_id, tournament_title):
     sample_participants_sheet = SHEET.worksheet('sample_participants')
     sample_participants = sample_participants_sheet.get('A1:A' + number)
     sample_participants_list = [participant[0] for participant in sample_participants]
-    # TODO - Add additional participants if the number of participants is not a power of 2
     print(f'Please wait, Adding {len(sample_participants_list)} participants to the tournament...')
     for i, participant in enumerate(sample_participants_list, start=2):
         SHEET.worksheet(tournament_id).batch_update([{ 'range': f'A{i}', 'values': [[participant]] }])
