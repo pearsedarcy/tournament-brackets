@@ -60,30 +60,35 @@ def import_participants(number, tournament_id):
     for i, participant in enumerate(sample_participants_list, start=2):
         SHEET.worksheet(tournament_id).batch_update([{ 'range': f'A{i}', 'values': [[participant]] }])
     print('Participants have been added to the tournament')
-    view_tournament(tournament_id)
+    view_tournament(tournament_id, tournament_title)
 
 
-def choose_participants(tournament_id):
+def choose_participants(tournament_id, tournament_title):
     '''
-    Choose whether to enter participants manually or or use sample participants
+    Choose how to enter participants
+    
     '''
-    print('Would you like to enter your own participants or use sample participants?')
-    print('1. Enter participants')
-    print('2. Use sample participants')
+    print('Would you like to enter your own participants or use sample participants?\n')
+    print('1. Enter participants manually')
+    print('2. Use sample participants\n')
+    print('Please enter the number of the option you would like to choose\n')
     while True:
-        choice = input('Please enter 1 or 2\n')
+        choice = input('Your Choice:  ').strip()
         if choice in ['1', '2']:
             if choice == '1':
-                input_participants(tournament_id)
+                input_participants(tournament_id, tournament_title)
                 break
-            else:
-                # TODO - Add input validation to ensure number of partipants is greater than 2 and less than 33 and that it is an integer
-                number_of_participants = input('How many participants would you like?\n')
-                import_participants(number_of_participants, tournament_id)
-            break
+            elif choice == '2':
+                print('How many participants would you like? (4, 8 or 16)\n')
+                while True:
+                    number_of_participants = input('Your Choice:  ').strip()
+                    if number_of_participants in ['4', '8', '16']:
+                        import_participants(number_of_participants, tournament_id, tournament_title)
+                        break
+                    else:
+                        print('\nInvalid input. Please choose between 4, 8 and 16\n')
         else:
-            print('Invalid input. Please enter 1 or 2')
-    return choice
+            print('\nInvalid input. Please enter a valid option (1 or 2)\n')
 
 
 def view_tournament(tournament_id, tournament_title):
@@ -95,7 +100,7 @@ def view_tournament(tournament_id, tournament_title):
     # if the tournament has no participants
     if tournament.get('A2') == [[]]:
         print('There are no participants in this tournament\n')
-        choose_participants(tournament_id)
+        choose_participants(tournament_id, tournament_title)
     else:
         print('What would you like to do?\n')
         print('1. Run the tournament')
@@ -107,7 +112,7 @@ def view_tournament(tournament_id, tournament_title):
             choice = input('Your input:  ')
             if choice.strip() in ['1', '2', '3', '4', 'exit']:
                 if choice.lower().strip()  == 'exit':
-                    view_tournament(tournament_id)
+                    view_tournament(tournament_id, tournament_title)
                 elif choice.strip() == '1':
                     run_tournament(tournament_id)
                 elif choice.strip() == '2':
