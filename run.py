@@ -157,16 +157,18 @@ def create_tournament():
     view_tournament(tournament_id)
 
 
-def intro(choice):
+def main_menu(choice):
     '''
-    Introduction and instructions
+    Allows the user to choose what they would like to do
+    from the main menu
     '''
 
     if choice == '1':
         create_tournament()
     elif choice == '2':
+        print('\nPlease enter the ID of the Tournament you would like to view\n')
         while True:
-            tournament_id = input('Please enter the ID of the Tournament you would like to view\n').upper().strip()
+            tournament_id = input('Your Choice:  ').upper().strip()
             try:
                 if tournament_id == 'EXIT':
                     main()
@@ -175,17 +177,11 @@ def intro(choice):
                     SHEET.worksheet(tournament_id)
                 break
             except gspread.exceptions.WorksheetNotFound:
-                print('Invalid ID. Please enter a valid ID or type "Exit" to go back')
+                print('\nInvalid ID. Please enter a valid ID or type "Exit" to go back\n')
         view_tournament(tournament_id)
     elif choice == '3':
-        print('Goodbye!')
-
-
-def create_worksheet(title):
-    '''
-    Creates a new worksheet with the given title
-    '''
-    SHEET.add_worksheet(title, 80, 25)
+        print('\nThank you for using Tournament Brackets\n')
+        print('If you would like to use the app again, please click the refresh button below\n')
 
 
 def main():
@@ -193,7 +189,8 @@ def main():
     Main function to run the program
     Acts as a menu for the user to choose what they would like to do
     '''
-    print('What would you like to do?\n')
+
+    print('\nWhat would you like to do?\n')
     print('1. Create a new Tournament')
     print('2. View an existing Tournament?')
     print('3. Exit\n')
@@ -204,7 +201,7 @@ def main():
             break
         else:
             print('\nInvalid input. Please enter a valid option (1, 2 or 3)\n')
-    intro(user_choice)
+    main_menu(user_choice)
 
 
 # Call main function
