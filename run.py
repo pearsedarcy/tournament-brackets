@@ -133,14 +133,30 @@ def view_tournament(tournament_id):
 def create_tournament():
     '''
     Create a new tournament
+    - Enter the title of the tournament and create a new sheet
+    - Generate a unique ID for the tournament
     '''
+    print('\nWhat would you like to call your tournament?\n')
     while True:
-        # TODO - add confirmation for the title i.e. are you sure you want to use this title?
-        tournament_title = input('\nEnter the name of the Tournament\n').title().strip()
+        tournament_title = input('Tournament Title:  ').title().strip()
         if len(tournament_title) > 3 and len(tournament_title) < 50:
+            print(f'\nAre you sure you want to use "{tournament_title}" as the title?\nYou will not be able to change this in the future (yes/no)\n')
+            confirmation = input('Your Choice:  ')
+            while confirmation.lower().strip() not in ['yes', 'y', 'no', 'n']:
+                print('\nInvalid input. Please enter "Yes" or "No"\n')
+                confirmation = input('Your Choice:  ')
+            if confirmation.lower().strip() == 'yes' or confirmation.lower().strip() == 'y':
             break
+            break
+            break
+                break
+                break
+            break
+                break
+            else:
+                print('\nPlease enter a new title\n')
         else:
-            print('Invalid input. Please enter a title between 4 and 50 characters.\n')
+            print('\nInvalid input. Please enter a title between 4 and 50 characters.\n')
     # Create the ID of the tournament
     tournament_id = tournament_title[0:3].upper() + str(random.randint(100, 999))
     # check if the ID already exists and create a new one if it does
@@ -152,9 +168,9 @@ def create_tournament():
             break
     # Create the tournament sheet
     SHEET.duplicate_sheet(source_sheet_id=1391351056, new_sheet_name=f'{tournament_id}')
-    print(f'{tournament_title} has been created!\n')
+    print(f'\n{tournament_title} has been created!\n')
     print(f'The ID of the tournament is {tournament_id}\nPlease take note of this for future reference\n')
-    view_tournament(tournament_id)
+    view_tournament(tournament_id, tournament_title)
 
 
 def main_menu(choice):
