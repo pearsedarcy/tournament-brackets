@@ -146,12 +146,6 @@ def create_tournament():
                 print('\nInvalid input. Please enter "Yes" or "No"\n')
                 confirmation = input('Your Choice:  ')
             if confirmation.lower().strip() == 'yes' or confirmation.lower().strip() == 'y':
-            break
-            break
-            break
-                break
-                break
-            break
                 break
             else:
                 print('\nPlease enter a new title\n')
