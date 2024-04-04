@@ -197,13 +197,13 @@ def main():
     print('1. Create a new Tournament')
     print('2. View an existing Tournament?')
     print('3. Exit\n')
+    print('Please enter the number of the option you would like to choose\n')
     while True:
-        print('Please enter the number of the option you would like to choose\n')
-        user_choice = input('Your Choice:  ') + '\n'
+        user_choice = input('Your Choice:  ')
         if user_choice in ['1', '2', '3']:
             break
         else:
-            print('Invalid input. Please enter a valid option.\n')
+            print('\nInvalid input. Please enter a valid option (1, 2 or 3)\n')
     intro(user_choice)
 
 
