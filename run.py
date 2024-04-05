@@ -31,6 +31,16 @@ def run_tournament(tournament_id):
     winner = participants_copy[0]
     SHEET.worksheet(tournament_id).batch_update([{'range': 'J2', 'values': [[winner]]}])
     print("The winner of the tournament is:", winner)
+    print("\n1. Return to Tournament Menu \n")
+    print("2. Exit\n")
+    choice = input("Your Choice: ").strip().lower()
+    while choice not in ['1', '2']:
+        print("\nInvalid input. Please enter '1' or '2'\n")
+        choice = input("Your Choice: ").strip()
+    if choice == '1':
+        view_tournament(tournament_id, SHEET.worksheet(tournament_id).title)
+    else:
+        main()
 
 
 def run_matchups(participants):
@@ -77,10 +87,10 @@ def input_participants(tournament_id, tournament_title, size):
             print('\nInvalid input. Please enter the name of each participant\n')
             continue
         break
-    print(f'Please wait, Adding {len(participants)} participants to the tournament...')
+    print(f'\nPlease wait, Adding {len(participants)} participants to the tournament...\n')
     for i, participant in enumerate(participants, start=2):
         SHEET.worksheet(tournament_id).batch_update([{'range': f'B{i}', 'values': [[participant]]}])
-    print('Participants have been added to the tournament')
+    print('\nParticipants have been added to the tournament\n')
     view_tournament(tournament_id, tournament_title)
 
 
@@ -103,7 +113,7 @@ def view_tournament(tournament_id, tournament_title):
     View a tournament
     '''
     tournament = SHEET.worksheet(tournament_id)
-    print(f'Welcome to {tournament_title}\n')
+    print(f'\nWelcome to {tournament_title}\n')
     print('What would you like to do?\n')
     print('1. Run the tournament')
     print('2. Delete Tournament')
@@ -251,4 +261,3 @@ def main():
 # Call main function
 if __name__ == '__main__':
     main()
-    
