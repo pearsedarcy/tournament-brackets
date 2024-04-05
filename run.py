@@ -56,6 +56,7 @@ def run_match(participant1, participant2):
     print(f"\nThe winner of the match is: {winner}\n")
     return winner
 
+
 # Delete tournament function
 def delete_tournament(tournament_id):
     '''
@@ -97,7 +98,7 @@ def import_participants(tournament_id, tournament_title, size):
     Import participants from the sample_participants sheet and add them to the tournament sheet
     '''
     sample_participants_sheet = SHEET.worksheet('sample_participants')
-    sample_participants = sample_participants_sheet.get('A1:A' + size)
+    sample_participants = sample_participants_sheet.get('B1:B' + size)
     sample_participants_list = [participant[0] for participant in sample_participants]
     print(f'\nPlease wait, Adding {len(sample_participants_list)} participants to the tournament...\n')
     for i, participant in enumerate(sample_participants_list, start=2):
