@@ -104,22 +104,19 @@ def view_tournament(tournament_id, tournament_title):
     print(f'Welcome to {tournament_title}\n')
     print('What would you like to do?\n')
     print('1. Run the tournament')
-    print('2. Edit Participants')
-    print('3. Delete Tournament')
-    print('4. Exit\n')
+    print('2. Delete Tournament')
+    print('3. Exit\n')
     print('Please enter the number of the option you would like to choose\n')
     while True:
         choice = input('Your input:  ').strip().lower()
-        if choice in ['1', '2', '3', '4', 'exit']:
+        if choice in ['1', '2', '3', 'exit']:
             if choice.lower()  == 'exit':
                 view_tournament(tournament_id, tournament_title)
             elif choice == '1':
                 run_tournament(tournament_id)
             elif choice == '2':
-                edit_participants(tournament_id)
-            elif choice == '3':
                 delete_tournament(tournament_id)
-            elif choice == '4':
+            elif choice == '3':
                 main()
             break
         else:
