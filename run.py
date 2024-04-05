@@ -72,16 +72,19 @@ def input_participants(tournament_id, tournament_title, size):
     '''
     print('\nType the name of each participant, separated by a comma\n')
     print('For example: John, Jane, Doe, Smith\n')
-    participants = input('Participants:  ').split(',')
-    participants = [participant.strip().title() for participant in participants]
-    while len(participants) != int(size):
-        print(f'\nInvalid number of participants. Please enter {size} participants\n')
+    while True:
         participants = input('Participants:  ').split(',')
-        participants = [participant.strip() for participant in participants]
-        break
-    if len(participants) != len(set(participants)):
+        participants = [participant.strip().title() for participant in participants]
+        if len(participants) != int(size):
+            print(f'\nInvalid number of participants. Please enter {size} participants\n')
+            continue
+        if len(participants) != len(set(participants)):
             print('\nInvalid input. Participants cannot have the same name\n')
-            input_participants(tournament_id, tournament_title, size)
+            continue
+        if '' in participants:
+            print('\nInvalid input. Please enter the name of each participant\n')
+            continue
+        break
     print(f'Please wait, Adding {len(participants)} participants to the tournament...')
     for i, participant in enumerate(participants, start=2):
         SHEET.worksheet(tournament_id).batch_update([{ 'range': f'B{i}', 'values': [[participant]] }])
