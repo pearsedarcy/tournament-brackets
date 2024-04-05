@@ -49,7 +49,7 @@ def run_matchups(participants):
 def run_match(participant1, participant2):
     print(f"Match between {participant1} and {participant2}:\n")
     print(f"Enter the name of the winning participant\n")
-    winner = input(f"Winner: ").strip()
+    winner = input(f"Winner: ").strip().title()
     while winner not in (participant1, participant2):
         print("Invalid input. Please enter the name of the winning participant correctly.\n")
         winner = input(f"Winner: ").strip()
