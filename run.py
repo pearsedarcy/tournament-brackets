@@ -66,27 +66,22 @@ def delete_tournament(tournament_id):
     main()
 
 
-def input_participants(tournament_id, tournament_title):
+def input_participants(tournament_id, tournament_title, size):
     '''
     Input participants manually
     '''
-    print('\nType the name of each participant\n')
-    print('Press enter after each name\n')
-    print('When you are done, type "Done"\n')
-    participants = []
-    while True:
-        participant = input().strip().title()
-        if participant.upper() == 'DONE':
-            break
-        elif len(participant) > 3 and len(participant) < 20:
-            if participant not in participants:
-                participants.append(participant)
-            else: 
-                print('Participant already exists. Please enter a unique name\n')
-        else:
-            print('Invalid input. Please enter a name between 4 and 20 characters')
+    print('\nType the name of each participant, separated by a comma\n')
+    print('For example: John, Jane, Doe, Smith\n')
+    participants = input('Participants:  ').split(',')
+    participants = [participant.strip().title() for participant in participants]
+    while len(participants) != int(size):
+        print(f'\nInvalid number of participants. Please enter {size} participants\n')
+        participants = input('Participants:  ').split(',')
+        participants = [participant.strip() for participant in participants]
         break
-    # TODO - Add additional participants if the number of participants is not a power of 2
+    if len(participants) != len(set(participants)):
+            print('\nInvalid input. Participants cannot have the same name\n')
+            input_participants(tournament_id, tournament_title, size)
     print(f'Please wait, Adding {len(participants)} participants to the tournament...')
     for i, participant in enumerate(participants, start=2):
         SHEET.worksheet(tournament_id).batch_update([{ 'range': f'B{i}', 'values': [[participant]] }])
@@ -151,7 +146,7 @@ def choose_participants(tournament_id, tournament_title, size):
         choice = input('Your Choice:  ').strip()
         if choice in ['1', '2']:
             if choice == '1':
-                input_participants(tournament_id, tournament_title)
+                input_participants(tournament_id, tournament_title, size)
                 break
             else:
                 import_participants(tournament_id, tournament_title, size)
