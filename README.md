@@ -1,32 +1,32 @@
-![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
+# Tournament Brackets
+Tournament Brackets is a web-based Command Line Interface (CLI) application that allows users to create and operate knockout tournament brackets. It also has an embedded Google Sheet which keeps track of all the tournaments and their results.
 
-Welcome,
+The user can create and operate as many tournaments as they like. They can enter their own participants or use the sample data. 
 
-This is the Code Institute student template for deploying your third portfolio project, the Python command-line project. The last update to this file was: **March 14, 2023**
+Visit the Live Website [HERE](https://tournament-brackets-ec84b8ac2e43.herokuapp.com/)
 
-## Reminders
+![Cover Image](docs/images/cover_img.webp)
 
-- Your code must be placed in the `run.py` file
-- Your dependencies must be placed in the `requirements.txt` file
-- Do not edit any of the other files or your code may not deploy properly
+## Instructions
+- Create a new tournament.
+- Input how many participants you would like to include in your tournament.
+- Decide if you want to input your own participants or use the sample data.
+- Run the brackets of your tournament to decide a winner.
+- View or delete your tournaments as you please.
 
-## Creating the Heroku app
 
-When you create the app, you will need to add two buildpacks from the _Settings_ tab. The ordering is as follows:
+## Site Owner Goals
+- Make a useful tournament management application, where data can be stored and edited.
+- Provide an intuitive user experience that ensures the user can easily navigate the app. 
+- To provide a storage solution for historical tournaments.
 
-1. `heroku/python`
-2. `heroku/nodejs`
+## User Stories
 
-You must then create a _Config Var_ called `PORT`. Set this to `8000`
-
-If you have credentials, such as in the Love Sandwiches project, you must create another _Config Var_ called `CREDS` and paste the JSON into the value field.
-
-Connect your GitHub repository and deploy as normal.
-
-## Constraints
-
-The deployment terminal is set to 80 columns by 24 rows. That means that each line of text needs to be 80 characters or less otherwise it will be wrapped onto a second line.
-
----
-
-Happy coding!
+- ### As a user I want to:
+  - Create and manage my tournaments.
+  - Operate the tournament brackets to be able to decide the winner.
+  - Have multiple options for different tournament sizes.
+  - Be guided through the app with intuitive input validation.
+  - Record the results of my tournaments.
+  - Be able to view my tournaments.
+  - Have the ability to delete my tournament data
