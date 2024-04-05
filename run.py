@@ -22,25 +22,14 @@ def run_tournament(tournament_id):
     participants_copy = participants.copy()
     while len(participants_copy) > 1:
         rounds.append(participants_copy)
-        # Add participants_copy to sheet
-        if len(rounds) == 1:
-            for i, participant in enumerate(participants_copy , start=2):
-                SHEET.worksheet(tournament_id).batch_update([{ 'range': f'D{i}', 'values': [[participant]] }])
-                SHEET.worksheet(tournament_id).batch_update([{ 'range': f'B{i}', 'values': [[participant]] }])
-        elif len(rounds) == 2:
-            for i, participant in enumerate(participants_copy, start=2):
-                SHEET.worksheet(tournament_id).batch_update([{ 'range': f'E{i}', 'values': [[participant]] }])
-        elif len(rounds) == 3:
-            for i, participant in enumerate(participants_copy, start=2):
-                SHEET.worksheet(tournament_id).batch_update([{ 'range': f'F{i}', 'values': [[participant]] }])
-        elif len(rounds) == 4:
-            for i, participant in enumerate(participants_copy, start=2):
-                SHEET.worksheet(tournament_id).batch_update([{ 'range': f'G{i}', 'values': [[participant]] }])
         print(f"Round {len(rounds)}")
         print("---------\n")
+        column = chr(67 + len(rounds))  # Columns starting from D (68 in ASCII)
+        for i, participant in enumerate(participants_copy, start=2):
+            SHEET.worksheet(tournament_id).batch_update([{ 'range': f'{column}{i}', 'values': [[participant]] }])
         participants_copy = run_matchups(participants_copy)
     winner = participants_copy[0]
-
+    SHEET.worksheet(tournament_id).batch_update([{ 'range': 'J2', 'values': [[winner]] }])
     print("The winner of the tournament is:", winner)
 
 def run_matchups(participants):
@@ -52,7 +41,7 @@ def run_match(participant1, participant2):
     winner = input(f"Winner: ").strip().title()
     while winner not in (participant1, participant2):
         print("Invalid input. Please enter the name of the winning participant correctly.\n")
-        winner = input(f"Winner: ").strip()
+        winner = input(f"Winner: ").strip().title()
     print(f"\nThe winner of the match is: {winner}\n")
     return winner
 
