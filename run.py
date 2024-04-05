@@ -13,12 +13,12 @@ SCOPE_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPE_CREDS)
 SHEET = GSPREAD_CLIENT.open('tournament_brackets')
 
+
 def run_tournament(tournament_id):
     tournament_sheet = SHEET.worksheet(tournament_id)
     participants = [participant[0] for participant in tournament_sheet.get('B2:B17')]
     rounds = []
     print("\nGenerating Matches...\n")
-
     participants_copy = participants.copy()
     while len(participants_copy) > 1:
         rounds.append(participants_copy)
@@ -26,14 +26,16 @@ def run_tournament(tournament_id):
         print("---------\n")
         column = chr(67 + len(rounds))  # Columns starting from D (68 in ASCII)
         for i, participant in enumerate(participants_copy, start=2):
-            SHEET.worksheet(tournament_id).batch_update([{ 'range': f'{column}{i}', 'values': [[participant]] }])
+            SHEET.worksheet(tournament_id).batch_update([{'range': f'{column}{i}', 'values': [[participant]]}])
         participants_copy = run_matchups(participants_copy)
     winner = participants_copy[0]
-    SHEET.worksheet(tournament_id).batch_update([{ 'range': 'J2', 'values': [[winner]] }])
+    SHEET.worksheet(tournament_id).batch_update([{'range': 'J2', 'values': [[winner]]}])
     print("The winner of the tournament is:", winner)
+
 
 def run_matchups(participants):
     return [run_match(participants[i], participants[i + 1]) for i in range(0, len(participants), 2)]
+
 
 def run_match(participant1, participant2):
     print(f"Match between {participant1} and {participant2}:\n")
@@ -77,7 +79,7 @@ def input_participants(tournament_id, tournament_title, size):
         break
     print(f'Please wait, Adding {len(participants)} participants to the tournament...')
     for i, participant in enumerate(participants, start=2):
-        SHEET.worksheet(tournament_id).batch_update([{ 'range': f'B{i}', 'values': [[participant]] }])
+        SHEET.worksheet(tournament_id).batch_update([{'range': f'B{i}', 'values': [[participant]]}])
     print('Participants have been added to the tournament')
     view_tournament(tournament_id, tournament_title)
 
@@ -91,7 +93,7 @@ def import_participants(tournament_id, tournament_title, size):
     sample_participants_list = [participant[0] for participant in sample_participants]
     print(f'\nPlease wait, Adding {len(sample_participants_list)} participants to the tournament...\n')
     for i, participant in enumerate(sample_participants_list, start=2):
-        SHEET.worksheet(tournament_id).batch_update([{ 'range': f'B{i}', 'values': [[participant]] }])
+        SHEET.worksheet(tournament_id).batch_update([{'range': f'B{i}', 'values': [[participant]]}])
     print('Participants have been added to the tournament\n')
     view_tournament(tournament_id, tournament_title)
 
@@ -110,7 +112,7 @@ def view_tournament(tournament_id, tournament_title):
     while True:
         choice = input('Your Choice:  ').strip().lower()
         if choice in ['1', '2', '3', 'exit']:
-            if choice.lower()  == 'exit':
+            if choice.lower() == 'exit':
                 view_tournament(tournament_id, tournament_title)
             elif choice == '1':
                 run_tournament(tournament_id)
@@ -186,6 +188,7 @@ def create_tournament():
     print(f'The ID of the tournament is {tournament_id}\nPlease take note of this for future reference\n')
     choose_participants(tournament_id, tournament_title, size)
 
+
 def create_tournament_sheet(size, tournament_id,):
     '''
     Create a new tournament sheet
@@ -248,3 +251,4 @@ def main():
 # Call main function
 if __name__ == '__main__':
     main()
+    
