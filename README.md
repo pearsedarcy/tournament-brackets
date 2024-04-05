@@ -36,6 +36,23 @@ To visualize the sequence of steps necessary for the application to work as desi
 
 ![Flow Chart](docs/images/flow_chart.webp)
 
+## Technologies and Libraries Used
+
+### Technologies
+- The app was planned using [Lucidchart](https://lucid.app/documents#/dashboard).
+- Developed in [VS Code](https://code.visualstudio.com/).
+- Version controlled with [GitHub](https://github.com/).
+- Validated with [CI Python Linter](https://pep8ci.herokuapp.com/).
+- Spell checked with [Grammerly](https://app.grammarly.com/).
+- Deployed using [Heroku Cloud Application Platform](https://dashboard.heroku.com/apps).
+
+
+### Libraries:
+
+- [random](https://docs.python.org/3/library/random.html?highlight=random#module-random): Create a random number with the 'randint' method.
+- [gspread](https://pypi.org/project/gspread/): Connect with Google Sheets. 
+- [google.oauth2.service_account](https://google-auth.readthedocs.io/en/stable/index.html): Access google accounts and validate credentials.
+
 
 ## Deployment
 
