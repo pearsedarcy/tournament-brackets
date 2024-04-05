@@ -108,7 +108,7 @@ def view_tournament(tournament_id, tournament_title):
     print('3. Exit\n')
     print('Please enter the number of the option you would like to choose\n')
     while True:
-        choice = input('Your input:  ').strip().lower()
+        choice = input('Your Choice:  ').strip().lower()
         if choice in ['1', '2', '3', 'exit']:
             if choice.lower()  == 'exit':
                 view_tournament(tournament_id, tournament_title)
