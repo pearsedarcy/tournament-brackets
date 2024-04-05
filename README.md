@@ -64,3 +64,11 @@ To achieve this, I followed these steps:
 19. If all is successful you will see a green tick and the words 'Your app was successfully deployed', if not, see above.
 20. Click the 'View' Button to see the live deployed version of your app.
 
+## Credits 
+### Resources Used
+- [GSPREAD DOCS](https://docs.gspread.org/en/v6.0.0/) I relied heavily on the Gspread documentation to implement the features which query and push to the Google Worksheet.
+- [This](https://www.programiz.com/python-programming/examples/random-number) Programiz tutorial showed me how to create a random number in Python.
+- [This](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/iframe) MDN Web Doc helped me implement the iframe
+- [Google](https://www.google.com) Search helped me innumerable times to find the correct syntax for methods.
+## Acknowledgments
+I would like to thank my Mentor Antonio Rodriguez for giving me guidance on this project.
