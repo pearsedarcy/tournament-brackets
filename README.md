@@ -86,7 +86,7 @@ Following these rigorous testing procedures, I ensured that the tournament brack
 ## Code Validation
 I used the Code Institute [Python Linter](https://pep8ci.herokuapp.com/) to
 validate the code base for the application.
-![PEP8 Image](./)
+![PEP8 Image](./docs/images/pep8.png)
 
 
 ## Technologies and Libraries Used
