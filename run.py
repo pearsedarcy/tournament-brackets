@@ -126,7 +126,7 @@ def import_participants(tournament_id, tournament_title, size):
                                 for participant in sample_participants]
     print(
         f"\nPlease wait, Adding {len(sample_participants_list)}"
-        "participants to the tournament...\n"
+        " participants to the tournament...\n"
     )
     for i, participant in enumerate(sample_participants_list, start=2):
         SHEET.worksheet(tournament_id).batch_update(
@@ -200,7 +200,7 @@ def create_tournament():
         if len(tournament_title) > 3 and len(tournament_title) < 50:
             print(
                 f'\nAre you sure you want to use'
-                f'{tournament_title} as the title?\n'
+                f'\n{tournament_title} as the title?\n'
                 'You will not be able to change this in the future(yes/no)\n')
             confirmation = input("Your Choice:  ").lower().strip()
             while confirmation.lower() not in ["yes", "y", "no", "n"]:
