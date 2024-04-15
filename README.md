@@ -33,8 +33,8 @@ Visit the Live Website [HERE](https://tournament-brackets-ec84b8ac2e43.herokuapp
 
 ## Features 
 
-### Welcome Screen/ Main Menu
-- Users are presented with a simple welcome message and options to create a new tournament, view existing tournaments, or exit the application.
+### Welcome Screen/Main Menu
+- Functionality: Users are presented with a simple welcome message and options to create a new tournament, view existing tournaments, or exit the application.
 - Options:
   1. Create a new Tournament
   2. View Existing Tournament
@@ -65,9 +65,9 @@ Visit the Live Website [HERE](https://tournament-brackets-ec84b8ac2e43.herokuapp
 - Functionality: Provides options for entering participants into the tournament.
 - Options:
   - Enter Participants Manually: Users input participant names individually.
-  ![Manual Input](./docs/images/manual_input(REPLACE).png)
+  ![Manual Input](./docs/images/manual_input.png)
   - Use Sample Participants: Participants are imported from a predefined list.
-  ![Sample Participants](./docs/images/...?????)
+  ![Sample Participants](./docs/images/sample_participants.png)
 - Error Handling:
   - Ensures the correct number of participants is entered based on the chosen tournament size.
   - Prevents duplicate participant names and empty inputs.
