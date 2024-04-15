@@ -94,10 +94,11 @@ Visit the Live Website [HERE](https://tournament-brackets-ec84b8ac2e43.herokuapp
 3. The app progresses through the rounds until a tournament winner is determined.
 4. Upon completion, the winner is displayed, and users can choose to return to
    the tournament menu or exit the app.
+![Tournament Winner](./docs/images/tournament_winner.png)
+
 - Error Handling:
   - Validates user input for match winners to ensure it matches the names of
     participants.
-![Tournament Winner](./docs/images/tournament_winner.png)
 
 ### Delete a Tournament
 - Functionality: Allows users to delete a tournament, removing all associated data.
