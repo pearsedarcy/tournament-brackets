@@ -117,7 +117,7 @@ def input_participants(tournament_id, tournament_title, size):
         break
     print(
         f"\nPlease wait,"
-        "Adding {len(participants)} participants to the tournament...\n"
+        f"Adding {len(participants)} participants to the tournament...\n"
     )
     for i, participant in enumerate(participants, start=2):
         SHEET.worksheet(tournament_id).batch_update(
