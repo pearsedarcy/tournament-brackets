@@ -41,15 +41,17 @@ Visit the Live Website [HERE](https://tournament-brackets-ec84b8ac2e43.herokuapp
   3. Exit the application
 - Error Handling: 
   - Ensures User can only input one of the options on the menu.
-![Main Menu](./docs/images/welcome_page)
+![Main Menu](./docs/images/welcome_page.png)
 
 ### Create a New Tournament
 - Functionality: Allows users to create a new tournament by specifying the title, number of participants, and participant entry method.
 - Steps:
   1. User provides a title for the tournament.
   ![Name Tournament](./docs/images/name_tournament.png)
+  2. User confirms title selection
+  ![Confirm title](./docs/images/confirm_title.png)
   2. User selects the number of participants (4, 8, or 16).
-  ![Size of Tournament](./docs/images/number_of_participants.png)
+  ![Size of Tournament](./docs/images/tournament_size.png)
   3. User chooses to enter participants manually or import sample participants.
   ![Participant Selection](./docs/images/participant_selection.png)
   4. Upon successful creation, the app generates a unique tournament ID for future
