@@ -31,11 +31,6 @@ Visit the Live Website [HERE](https://tournament-brackets-ec84b8ac2e43.herokuapp
   - Be able to view my tournaments.
   - Have the ability to delete my tournament data
 
-## Logic Flow
-To visualize the sequence of steps necessary for the application to work as desired, I utilized [Lucid Chart](https://www.lucidchart.com) to create a flowchart. It helped me plan the project by showing what functions the application needed, when they were needed, and how different parts of the application would work together.
-
-![Flow Chart](./docs/images/flow_chart.webp)
-
 ## Features 
 
 ### Welcome Screen/ Main Menu
