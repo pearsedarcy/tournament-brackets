@@ -55,6 +55,7 @@ Visit the Live Website [HERE](https://tournament-brackets-ec84b8ac2e43.herokuapp
   4. Upon successful creation, the app generates a unique tournament ID for future
      reference.
 - Error Handling:
+  - Limits the number of characters in a title.
   - Checks for invalid input regarding the number of participants.
   - Generates a unique tournament ID to avoid conflicts with existing tournaments.
 
@@ -108,11 +109,11 @@ Visit the Live Website [HERE](https://tournament-brackets-ec84b8ac2e43.herokuapp
 # Testing
 
 ## Manual Testing
-In my endeavor to ensure the reliability and functionality of the tournament brackets app, I meticulously conducted a series of manual tests covering various aspects of its functionality. I did this in both the local version, and the live version. Below are the steps I took to validate the app:
+In my endeavour to ensure the reliability and functionality of the Tournament Brackets app, I meticulously conducted a series of manual tests covering various aspects of its functionality. I did this in both the local version, and the live version. Below are the steps I took to validate the app:
 
 ### Menu Navigation:
 - Input: Entered the all the choices from the all the menus
-- Outcome: Ensure correct navigation through application.
+- Outcome: Ensure correct navigation through the application.
 
 ### Creating a New Tournament:
 - Input: Entered the title for the tournament.
@@ -123,7 +124,7 @@ In my endeavor to ensure the reliability and functionality of the tournament bra
 - Outcome: Confirmed that participants were seamlessly added to the tournament sheet without any duplicates or empty entries, maintaining data integrity.
 
 ### Importing Participants from Sample Data:
-- Input: Chose to import sample participants.
+- Input: Choose to import sample participants.
 - Outcome: Carefully imported sample participants to the tournament sheet, ensuring accurate data transfer and reflection in the app.
 
 ### Running Matches:
@@ -135,7 +136,7 @@ In my endeavor to ensure the reliability and functionality of the tournament bra
 - Outcome: Validated that the app displayed the correct tournament and provided intuitive options to run matches, delete tournaments, or exit, enhancing user convenience.
 
 ### Deleting a Tournament:
-- Input: Chose to delete an existing tournament.
+- Input: Choose to delete an existing tournament.
 - Outcome: Verified that upon selecting the option to delete a tournament, the corresponding tournament sheet was promptly removed, ensuring efficient management of tournament data.
 
 ### Error Handling - Invalid Inputs:
@@ -150,12 +151,54 @@ In my endeavor to ensure the reliability and functionality of the tournament bra
 - Input: Simulated concurrent user interactions (e.g., multiple users adding participants or running matches simultaneously).
 - Outcome: Confirmed that the app maintained data integrity and consistency, even under simultaneous user interactions, thus ensuring a stable and reliable platform for managing tournaments.
 
-Following these rigorous testing procedures, I ensured that the tournament brackets app met the highest standards of reliability, functionality, and user experience, providing users with a seamless and enjoyable tournament management experience.
+Following these rigorous testing procedures, I ensured that the Tournament Brackets app met the highest standards of reliability, functionality, and user experience, providing users with a seamless and enjoyable tournament management experience.
 
 ## Code Validation
 I used the Code Institute [Python Linter](https://pep8ci.herokuapp.com/) to
 validate the code base for the application.
 ![PEP8 Image](./docs/images/pep8.png)
+
+## Bugs
+
+### Resolved
+1. Deleting tournament and exiting program
+  - Issue:
+    When a user deleted a tournament and exited the program, the program was
+    still stuck in the choose_participants while loop.
+  - Resolution:
+    I fixed this by adding a
+    break to end the loop after the parameters had been met.
+
+2. Uneven number of Participants
+  - Issue:
+    User could enter an uneven number of participants which would then not
+    correctly divide into the tournament matches.
+  - Resolution:
+    I changed the function to only accept either 4, 8 or 16 participants, with
+    input validation to ensure this requirement.
+
+
+### Unresolved
+1. Embedded Google Sheet
+  - Context:
+    By embedding the Google sheet into the application, I thought it would
+    greatly improve the User Interface (UI). I had planned to use this to
+    display the progress of the rounds live to the user as they progressed
+    through the tournament management. 
+  - Issue:
+    The iframe in which the Google sheet is embedded in does not live update how it is supposed to. I was unable to program the iframe to
+    refresh often enough, or at all for that matter, so that the user can see
+    the progress and results of the tournament. The iframe also seems to cache
+    in the browser, so upon refreshing the page, it does not always refresh the
+    iframe, showing any new events the user may have added.
+
+2. User can delete other people's tournaments
+  - Context:
+    I had planned on implementing a system by which a user would not be able to
+    access another user's tournaments
+  - Issue:
+    I failed to implement this functionality, meaning any user is able correctly
+    to access and in turn, delete another user's tournaments.
 
 
 ## Technologies and Libraries Used
