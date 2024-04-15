@@ -5,7 +5,7 @@ The user can create and operate as many tournaments as they like. They can enter
 
 Visit the Live Website [HERE](https://tournament-brackets-ec84b8ac2e43.herokuapp.com/)
 
-![Cover Image](docs/images/cover_img.webp)
+![Cover Image](./docs/images/cover_img.webp)
 
 ## Instructions
 - Create a new tournament.
@@ -34,7 +34,81 @@ Visit the Live Website [HERE](https://tournament-brackets-ec84b8ac2e43.herokuapp
 ## Logic Flow
 To visualize the sequence of steps necessary for the application to work as desired, I utilized [Lucid Chart](https://www.lucidchart.com) to create a flowchart. It helped me plan the project by showing what functions the application needed, when they were needed, and how different parts of the application would work together.
 
-![Flow Chart](docs/images/flow_chart.webp)
+![Flow Chart](./docs/images/flow_chart.webp)
+
+## Features 
+
+### Welcome Screen/ Main Menu
+- Users are presented with a simple welcome message and options to create a new tournament, view existing tournaments, or exit the application.
+- Options:
+  1. Create a new Tournament
+  2. View Existing Tournament
+  3. Exit the application
+- Error Handling: 
+  - Ensures User can only input one of the options on the menu.
+![Main Menu](./docs/images/welcome_page)
+
+### Create a New Tournament
+- Functionality: Allows users to create a new tournament by specifying the title, number of participants, and participant entry method.
+- Steps:
+  1. User provides a title for the tournament.
+  ![Name Tournament](./docs/images/name_tournament.png)
+  2. User selects the number of participants (4, 8, or 16).
+  ![Size of Tournament](./docs/images/number_of_participants.png)
+  3. User chooses to enter participants manually or import sample participants.
+  ![Participant Selection](./docs/images/participant_selection.png)
+  4. Upon successful creation, the app generates a unique tournament ID for future
+     reference.
+- Error Handling:
+  - Checks for invalid input regarding the number of participants.
+  - Generates a unique tournament ID to avoid conflicts with existing tournaments.
+
+### Manage Participants
+- Functionality: Provides options for entering participants into the tournament.
+- Options:
+  - Enter Participants Manually: Users input participant names individually.
+  ![Manual Input](./docs/images/manual_input(REPLACE).png)
+  - Use Sample Participants: Participants are imported from a predefined list.
+  ![Sample Participants](./docs/images/...?????)
+- Error Handling:
+  - Ensures the correct number of participants is entered based on the chosen tournament size.
+  - Prevents duplicate participant names and empty inputs.
+
+### View Existing Tournaments
+- Functionality: Enables users to view existing tournaments by providing the tournament ID.
+- Steps:
+1. User selects the option to view an existing tournament.
+2. User inputs the tournament ID to access the tournament details.
+- Error Handling:
+  - Verifies the provided tournament ID to ensure it corresponds to an existing tournament.
+![View Tournament](./docs/images/view_tournament.png)
+
+### Run a Tournament
+- Functionality: Executes the tournament matches and determines the winner.
+- Steps:
+1. The app generates match pairings based on the number of participants.
+2. Users input the winners of each match.
+3. The app progresses through the rounds until a tournament winner is determined.
+4. Upon completion, the winner is displayed, and users can choose to return to
+   the tournament menu or exit the app.
+- Error Handling:
+  - Validates user input for match winners to ensure it matches the names of
+    participants.
+![Tournament Winner](./docs/images/tournament_winner.png)
+
+### Delete a Tournament
+- Functionality: Allows users to delete a tournament, removing all associated data.
+- Steps:
+1. User selects the option to delete a tournament.
+![Delete Tournament](./docs/images/delete_tournament.png)
+
+### Exit Application
+- Functionality: Allows users to exit the application.
+- Steps:
+  1. User selects option to exit the application.
+  2. User is thanked for their usage and prompted to click the refresh button if
+     they would like to use the application again.
+![Exit App](./docs/images/exit_app.png)
 
 # Testing
 
