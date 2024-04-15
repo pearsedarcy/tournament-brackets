@@ -81,11 +81,16 @@ Visit the Live Website [HERE](https://tournament-brackets-ec84b8ac2e43.herokuapp
   - Verifies the provided tournament ID to ensure it corresponds to an existing tournament.
 ![View Tournament](./docs/images/view_tournament.png)
 
+### Tournament Menu
+  - Functionality: Acts as a menu to allow users to manage their Tournament
+![Tournament Menu](./docs/images/tournament_menu.png.png)
+
 ### Run a Tournament
 - Functionality: Executes the tournament matches and determines the winner.
 - Steps:
 1. The app generates match pairings based on the number of participants.
 2. Users input the winners of each match.
+![Round 1](round_1.png)
 3. The app progresses through the rounds until a tournament winner is determined.
 4. Upon completion, the winner is displayed, and users can choose to return to
    the tournament menu or exit the app.
