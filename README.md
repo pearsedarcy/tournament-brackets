@@ -106,54 +106,91 @@ Visit the Live Website [HERE](https://tournament-brackets-ec84b8ac2e43.herokuapp
      they would like to use the application again.
 ![Exit App](./docs/images/exit_app.png)
 
-# Testing
+## Data Model
+The data model of the Tournament Bracket App primarily revolves around two main entities:
+1. Tournament
+  Attributes:
+  - Title: The name of the tournament.
+  - ID: A unique identifier for the tournament.
+  - Participants: A list of participants involved in the tournament.
+  - Size: The number of participants in the tournament (4, 8, or 16).
+  - Matches: Pairings between participants in each round.
+  - Winner: The final winner of the tournament.
 
-## Manual Testing
+2. Participant:
+  Attributes:
+  - Name: The name of the participant.
+
+## Business Logic:
+The business logic of the Tournament Bracket App follows these key principles:
+
+1. User Interaction:
+- The application provides a user-friendly interface with clear instructions and prompts.
+- Input validation ensures that users provide correct and relevant information at each step.
+
+2. Data Management:
+- Tournaments and participant data are stored in Google Sheets for easy access and management.
+- Unique tournament IDs prevent conflicts and ensure data integrity.
+
+3. Error Handling:
+- The app includes robust error handling mechanisms to handle edge cases and prevent crashes.
+- Users are notified of any invalid inputs or operations and prompted to provide valid inputs or actions.
+
+4. Scalability and Flexibility:
+- The application is designed to accommodate tournaments of various sizes (4, 8, or 16 participants).
+- It allows users to choose between manual participant entry and importing sample participants, providing flexibility in tournament setup.
+
+5. Data Security:
+- Google OAuth2 authentication ensures secure access to Google Sheets, protecting tournament data from unauthorized access.
+
+## Testing
+
+### Manual Testing
 In my endeavour to ensure the reliability and functionality of the Tournament Brackets app, I meticulously conducted a series of manual tests covering various aspects of its functionality. I did this in both the local version, and the live version. Below are the steps I took to validate the app:
 
-### Menu Navigation:
+#### Menu Navigation:
 - Input: Entered the all the choices from the all the menus
 - Outcome: Ensure correct navigation through the application.
 
-### Creating a New Tournament:
+#### Creating a New Tournament:
 - Input: Entered the title for the tournament.
 - Outcome: Verified that a new tournament sheet was created with a unique ID and the appropriate size, ensuring seamless tournament management.
 
-### Adding Participants Manually:
+#### Adding Participants Manually:
 - Input: Entered a list of participant names separated by commas.
 - Outcome: Confirmed that participants were seamlessly added to the tournament sheet without any duplicates or empty entries, maintaining data integrity.
 
-### Importing Participants from Sample Data:
+#### Importing Participants from Sample Data:
 - Input: Choose to import sample participants.
 - Outcome: Carefully imported sample participants to the tournament sheet, ensuring accurate data transfer and reflection in the app.
 
-### Running Matches:
+#### Running Matches:
 - Input: Simulated match outcomes by entering the winning participant.
 - Outcome: Ensured that matches progressed smoothly through rounds until a deserving winner was determined, facilitating fair competition.
 
-### Viewing an Existing Tournament:
+#### Viewing an Existing Tournament:
 - Input: Entered the ID of an existing tournament.
 - Outcome: Validated that the app displayed the correct tournament and provided intuitive options to run matches, delete tournaments, or exit, enhancing user convenience.
 
-### Deleting a Tournament:
+#### Deleting a Tournament:
 - Input: Choose to delete an existing tournament.
 - Outcome: Verified that upon selecting the option to delete a tournament, the corresponding tournament sheet was promptly removed, ensuring efficient management of tournament data.
 
-### Error Handling - Invalid Inputs:
+#### Error Handling - Invalid Inputs:
 - Input: Provided invalid inputs during various operations (e.g., incorrect tournament ID, invalid number of participants).
 - Outcome: Ensured that the app responded appropriately by displaying clear error messages and guiding users to input valid data, thereby enhancing user experience and minimizing errors.
 
-### Performance Testing:
+#### Performance Testing:
 - Input: Created tournaments with a large number of participants (e.g. 16 participants).
 - Outcome: Rigorously tested performance under load, confirming that the app's responsiveness remained optimal, even when handling a significant number of participants, thereby ensuring uninterrupted tournament management.
 
-## Concurrency Testing:
+### Concurrency Testing:
 - Input: Simulated concurrent user interactions (e.g., multiple users adding participants or running matches simultaneously).
 - Outcome: Confirmed that the app maintained data integrity and consistency, even under simultaneous user interactions, thus ensuring a stable and reliable platform for managing tournaments.
 
 Following these rigorous testing procedures, I ensured that the Tournament Brackets app met the highest standards of reliability, functionality, and user experience, providing users with a seamless and enjoyable tournament management experience.
 
-## Code Validation
+### Code Validation
 I used the Code Institute [Python Linter](https://pep8ci.herokuapp.com/) to
 validate the code base for the application.
 ![PEP8 Image](./docs/images/pep8.png)
@@ -233,7 +270,9 @@ To achieve this, I followed these steps:
 6. Click on the Settings Tab.
 7. Scroll to the 'Config Vars' section and click 'Reveal Config Vars'.
 8. Enter the word 'port' into the 'KEY' section and '8000' into the 'VALUE' section, then click 'Add'.
-9. In the following 'KEY' section, enter the word 'CREDS', in the corresponding 'VALUE' section, paste the contents of your creds.json file, which contains your Google Sheets API Key.
+9. In the following 'KEY' section, enter the word 'CREDS', in the corresponding
+   'VALUE' section, paste the contents of your creds.json file, which contains
+   your Google Sheets API Key.
 10. Scroll to the 'Buildpack' section below and click 'Add Buildpack'. Click the 'Python' button and click 'Add Buildpack'.
 11. Repeat step 10 to add the 'node.js' buildpack as well. Ensure that the order of these two steps is correct.
 12. That's all for the 'Settings' tab, scroll back to the top and click the 'Deploy' tab.
@@ -245,6 +284,11 @@ To achieve this, I followed these steps:
 18. Watch the build log to see if any errors occur.
 19. If all is successful you will see a green tick and the words 'Your app was successfully deployed', if not, see above.
 20. Click the 'View' Button to see the live deployed version of your app.
+
+## Retrospective
+In retrospect, I should have used an Object Orientated Programming (OOP) to
+create the data model for the project. I would have instanciated a class of a
+tournament.
 
 ## Credits 
 ### Resources Used
