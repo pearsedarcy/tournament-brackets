@@ -15,6 +15,14 @@ SHEET = GSPREAD_CLIENT.open("tournament_brackets")
 
 
 def run_tournament(tournament_id):
+    """
+    Run the tournament
+    - Get the participants from the tournament sheet
+    - Generate matchups for each round
+    - Get the winner of each match
+    - Update the sheet with the winner of each match
+    - Get the winner of the tournament
+    """
     tournament_sheet = SHEET.worksheet(tournament_id)
     participants = [participant[0]
                     for participant in tournament_sheet.get("B2:B17")]
@@ -25,7 +33,7 @@ def run_tournament(tournament_id):
         rounds.append(participants_copy)
         print(f"Round {len(rounds)}")
         print("---------\n")
-        column = chr(67 + len(rounds))  # Columns starting from D (68 in ASCII)
+        column = chr(67 + len(rounds))
         for i, participant in enumerate(participants_copy, start=2):
             SHEET.worksheet(tournament_id).batch_update(
                 [{"range": f"{column}{i}", "values": [[participant]]}]
@@ -34,7 +42,6 @@ def run_tournament(tournament_id):
     winner = participants_copy[0]
     SHEET.worksheet(tournament_id).batch_update
     ([{"range": "J2", "values": [[winner]]}])
-
     print("The winner of the tournament is:", winner)
     print("\n1. Return to Tournament Menu \n")
     print("2. Exit\n")
@@ -49,6 +56,9 @@ def run_tournament(tournament_id):
 
 
 def run_matchups(participants):
+    """
+    Generate matchups for each round
+    """
     return [
         run_match(participants[i], participants[i + 1])
         for i in range(0, len(participants), 2)
@@ -56,6 +66,9 @@ def run_matchups(participants):
 
 
 def run_match(participant1, participant2):
+    """
+    Run a match between two participants
+    """
     print(f"Match between {participant1} and {participant2}:\n")
     print(f"Enter the name of the winning participant\n")
     winner = input(f"Winner: ").strip().title()
@@ -69,7 +82,6 @@ def run_match(participant1, participant2):
     return winner
 
 
-# Delete tournament function
 def delete_tournament(tournament_id):
     """
     Delete a tournament
